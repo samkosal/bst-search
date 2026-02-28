@@ -17,6 +17,28 @@ public class BstSearch {
      * @throws NullPointerException if target is null
      */
     public static <T extends Comparable<T>> boolean contains(BinaryTreeNode<T> root, T target) {
-        return false;
+        if (root == null) {
+            return false;
+        }
+        if (root.data == target) {
+            return true;
+        }   
+        
+        boolean left = contains(root.left, target);
+        boolean right = contains(root.right, target);
+
+        return right || left;
+    }
+
+    public static void main(String[] args) {
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(10);
+        root.left = new BinaryTreeNode<>(5);
+        root.right = new BinaryTreeNode<>(15);
+        root.left.left = new BinaryTreeNode<>(2);
+        root.left.right = new BinaryTreeNode<>(7);
+
+        int target = 7;
+        boolean found = contains(root, target);
+        System.out.println("Tree contains " + target + ": " + found);
     }
 }
